@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/ui">
+        <file alias="flag.png">flag.png</file>
+        <file alias="boom.png">boom.png</file>
+        <file alias="mine.png">mine.png</file>
+        <file alias="errormine.png">scanedMine.png</file>
+    </qresource>
+</RCC>
