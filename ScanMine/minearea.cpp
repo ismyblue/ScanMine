@@ -27,7 +27,7 @@ MineArea::MineArea(QWidget *parent, int row, int col, int mineCount) : QFrame(pa
     this->scanedCount = 0;
 
     // 判断结果信号，连接判断结果槽
-    connect(this, SIGNAL(judgeIsWin()), this, SLOT(slotJudgeIsWin()));
+    connect(this, &MineArea::judgeIsWin, this, &MineArea::slotJudgeIsWin);
 }
 
 // 随机化数据
@@ -46,11 +46,11 @@ void MineArea::randomGridsData()
             grids[i][j] = new Grid(this, i, j, 0, false);
             mainLayout->addWidget(grids[i][j], i, j);
             // 格子打开信号->打开周围空白格子
-            connect(grids[i][j], SIGNAL(gridOpen(int, int, bool)), this, SLOT(slotOpenEmptyGrid(int, int, bool)));
+            connect(grids[i][j], &Grid::gridOpen, this, &MineArea::slotOpenEmptyGrid);
             // 格子状态改变信号->统计插旗数
-            connect(grids[i][j], SIGNAL(changeStatus(Grid::STATUS, Grid::STATUS)), this, SLOT(slotUpdateFlagCount(Grid::STATUS, Grid::STATUS)));
+            connect(grids[i][j], &Grid::changeStatus, this, &MineArea::slotUpdateFlagCount);
             // 格子状态改变信号->统计完成扫描数
-            connect(grids[i][j], SIGNAL(changeStatus(Grid::STATUS, Grid::STATUS)), this, SLOT(slotUpdateScanedCount(Grid::STATUS, Grid::STATUS)));
+            connect(grids[i][j], &Grid::changeStatus, this, &MineArea::slotUpdateScanedCount);
 
         }
     }
