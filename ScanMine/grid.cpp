@@ -12,8 +12,8 @@ Grid::Grid(QWidget *parent, int rowIndex, int colIndex, int data, bool isMine)
 
 
     this->status = Grid::CLOSE;
-    connect(this, SIGNAL(changeStatus(Grid::STATUS, Grid::STATUS)), this, SLOT(slotChangeStatus(Grid::STATUS)));
-    connect(this, SIGNAL(displayStatus()), this, SLOT(slotDisplayStatus()));
+    connect(this, &Grid::changeStatus, this, &Grid::slotChangeStatus);
+    connect(this, &Grid::displayStatus, this, &Grid::slotDisplayStatus);
 //    this->setText(QString("shit"));
     emit displayStatus();
 }

@@ -22,9 +22,9 @@ ScanMine::ScanMine(QWidget *parent)
     //    this->move
 
     // 完成扫描->公布结果
-    connect(mineArea, SIGNAL(finishedScan(bool)), mineArea, SLOT(slotOpenAllGrid()));
+    connect(mineArea, &MineArea::finishedScan, mineArea, &MineArea::slotOpenAllGrid);
     // 完成扫描->游戏结束，弹窗
-    connect(mineArea, SIGNAL(finishedScan(bool)), this, SLOT(slotShowGameResult(bool)));
+    connect(mineArea, &MineArea::finishedScan, this, &ScanMine::slotShowGameResult);
 
     // 计时清零
     playSeconds = 0;
@@ -35,10 +35,10 @@ ScanMine::ScanMine(QWidget *parent)
     timer = new QTimer();
     timer->start(1000);
     // 更新时间
-    connect(timer, SIGNAL(timeout()), this, SLOT(timer_timeout()));
+    connect(timer, &QTimer::timeout, this, &ScanMine::timer_timeout);
 
     // 更新插旗数
-    connect(mineArea, SIGNAL(updateFlagCount(int)), this, SLOT(flag_count(int)));
+    connect(mineArea, &MineArea::updateFlagCount, this, &ScanMine::flag_count);
 
 
 }
